@@ -1,28 +1,30 @@
 import React from "react"
+import HeaderTitle from "./HeaderTitle";
+import HeaderBurgerMenu from "./HeaderBurgerMenu";
+import HeaderItemList from "./HeaderItemList";
 
 class Header extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            collapsed: false
+        }
+    }
+
+    toggle = () => {
+        this.setState({collapsed: !this.state.collapsed})
+    };
+
     render() {
+        const {collapsed} = this.state;
+
         return (
             <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <a className="navbar-brand" href="#">Fixed navbar</a>
-                <button className="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="navbar-collapse collapse" id="navbarCollapse">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Link</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link disabled" href="#">Disabled</a>
-                        </li>
-                    </ul>
-                </div>
+                <HeaderTitle text={"React-Mobx-Gae"}/>
+                <HeaderBurgerMenu collapsed={collapsed} toggle={this.toggle}/>
+                <HeaderItemList collapsed={collapsed}/>
             </nav>
         )
     }
