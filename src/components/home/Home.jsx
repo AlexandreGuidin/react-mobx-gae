@@ -28,17 +28,34 @@ class Home extends React.Component {
         const {name, logged} = this.state;
 
         return (
-            <div>
-                <h2>Home</h2>
-                <Link to={"/user"}><h3>Logged Area</h3></Link>
+            <div className={""}>
+                <div className={"row"}>
+                    <div className={"col-12"}>
+                        <h2>Home</h2>
+                    </div>
+                </div>
 
-                <form onSubmit={this.handleSubmit}>
-                    <input type={"text"} placeholder={"USER NAME"} onChange={this.handleChange} value={name}/>
-                    <input type={"submit"} value={"LogIN"}/>
-                </form>
+                <div className={"row"}>
+                    <div className={"col-12"}>
+                        <Link to={"/user"}><h3>Logged Area</h3></Link>
+                    </div>
+                </div>
+
+                <div className={"row"}>
+                    <div className={"col-12"}>
+                        <form onSubmit={this.handleSubmit}>
+                            <input type={"text"} placeholder={"USER NAME"} onChange={this.handleChange} value={name}/>
+                            <input type={"submit"} value={"LogIN"}/>
+                        </form>
+                    </div>
+                </div>
 
                 {logged &&
-                <span>LOGGED!</span>
+                <div className={"row"}>
+                    <div className={"col-12"}>
+                        <span>LOGGED!</span>
+                    </div>
+                </div>
                 }
             </div>
         )
