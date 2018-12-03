@@ -4,8 +4,10 @@ class Header extends React.Component {
 
     render() {
         return (
-            <div>
-                Header
+            <div className={"row"}>
+                <div className={"col-12"}>
+                    Header
+                </div>
             </div>
         )
     }

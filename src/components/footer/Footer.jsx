@@ -3,9 +3,13 @@ import React from "react"
 class Footer extends React.Component {
     render() {
         return (
-            <div>
-                Footer
-            </div>
+            <footer>
+                <div className={"row"}>
+                    <div className={"col-12"}>
+                        Footer
+                    </div>
+                </div>
+            </footer>
         )
     }
 }
