@@ -28,8 +28,7 @@ Field.propTypes = {
     help: PropTypes.string,
     placeholder: PropTypes.string,
     type: PropTypes.string,
-    status: PropTypes.string,
-    required: PropTypes.bool
+    status: PropTypes.string
 };
 
 export default Field
