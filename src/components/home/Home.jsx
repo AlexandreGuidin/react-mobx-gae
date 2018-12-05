@@ -2,6 +2,9 @@ import React from "react"
 import {Link} from "react-router-dom";
 import {inject} from "mobx-react";
 import {USER_STORE} from "../../stores/user-store";
+import Form from "../commons/form/Form";
+import Field from "../commons/form/Field";
+import {FORM_STATUS} from "../../utils/enums";
 
 class Home extends React.Component {
 
@@ -49,6 +52,15 @@ class Home extends React.Component {
                         </form>
                     </div>
                 </div>
+
+                <Form>
+                    <Field value={''}
+                           col={'col-3'}
+                           label={'Name'}
+                           placeholder={"PLACEHOLDER HERE"}
+                           status={FORM_STATUS.INVALID}
+                           feedbackMessage={"Wrong"}/>
+                </Form>
 
                 {logged &&
                 <div className={"row"}>
