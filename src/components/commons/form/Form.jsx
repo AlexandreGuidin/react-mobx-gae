@@ -2,19 +2,25 @@ import React from "react"
 import PropTypes from "prop-types";
 import "./form.css"
 
-class Form extends React.Component {
+const Form = ({children, values, schema, className, success, handleErrors}) => {
 
-    render() {
-        const {children} = this.props;
+    const validate = (event) => {
+        const {success} = this.props;
+        event.preventDefault();
 
-        return (
-            <form>
-                {children}
-            </form>
-        )
-    }
-}
 
-Form.propTypes = {};
+        success();
+    };
+
+
+    return (
+        <form onSubmit={validate} className={className}>
+            {children}
+        </form>
+    )
+};
+
+Form.propTypes = {
+};
 
 export default Form

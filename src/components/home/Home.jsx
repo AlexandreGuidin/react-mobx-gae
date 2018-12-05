@@ -4,10 +4,12 @@ import {inject} from "mobx-react";
 import {USER_STORE} from "../../stores/user-store";
 import Form from "../commons/form/Form";
 import Field from "../commons/form/Field";
-import {FORM_STATUS} from "../../utils/enums";
+import {BTN_OUTLINE_STYLE, BTN_STYLE, FORM_STATUS} from "../../utils/enums";
 import Checkbox from "../commons/form/Checkbox";
 import Select from "../commons/form/Select";
 import Radio from "../commons/form/Radio";
+import Button from "../commons/form/Button";
+import {FormHoc} from "../commons/form/FormHoc";
 
 class Home extends React.Component {
 
@@ -44,6 +46,8 @@ class Home extends React.Component {
             value: "option3"
         }];
 
+
+
         return (
             <div className={""}>
                 <div className={"row"}>
@@ -52,20 +56,6 @@ class Home extends React.Component {
                     </div>
                 </div>
 
-                <div className={"row"}>
-                    <div className={"col-12"}>
-                        <Link to={"/user"}><h3>Logged Area</h3></Link>
-                    </div>
-                </div>
-
-                <div className={"row"}>
-                    <div className={"col-12"}>
-                        <form onSubmit={this.handleSubmit}>
-                            <input type={"text"} placeholder={"USER NAME"} onChange={this.handleChange} value={name}/>
-                            <input type={"submit"} value={"LogIN"}/>
-                        </form>
-                    </div>
-                </div>
 
                 <Form>
                     <Field value={''}
@@ -74,27 +64,12 @@ class Home extends React.Component {
                            placeholder={"PLACEHOLDER HERE"}
                            status={FORM_STATUS.INVALID}
                            feedback={"Wrong"}
-                    onchange={() => {}}/>
-
-                    <Checkbox value={"yes"} feedback={"wrong"} label={"Want to continue"} name={"accept"} status={FORM_STATUS.VALID}onchange={() => {}}/>
-
-
-                    <Select status={FORM_STATUS.INVALID} feedback={"teste"} options={options}onchange={() => {}}/>
-
-
-                    <Radio value={'a'} onchange={() => {}} status={FORM_STATUS.VALID} label={"label a"} feedback={"wrong"} name={"a"}/>
-                    <Radio value={"b"} onchange={() => {}} status={FORM_STATUS.INVALID} label={"label b"} feedback={"wrong"} name={"b"}/>
-
-
+                           onchange={() => {
+                           }}/>
                 </Form>
 
-                {logged &&
-                <div className={"row"}>
-                    <div className={"col-12"}>
-                        <span>LOGGED!</span>
-                    </div>
-                </div>
-                }
+
+
             </div>
         )
     }

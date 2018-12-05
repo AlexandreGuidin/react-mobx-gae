@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types";
 import {FORM_STATUS} from "../../../utils/enums";
-import Form from "./Form";
 
 const Radio = ({value, name, label, feedback, status = FORM_STATUS.UNCHECKED, onchange}) => {
     return (

@@ -4,10 +4,18 @@ import {FORM_STATUS} from "../../../utils/enums";
 
 
 const Field = ({col, label, value, name, feedback = '', help = '', placeholder = '', status = FORM_STATUS.UNCHECKED, onchange}) => {
+
+    const returnValue = (event) => {
+        onchange({
+            name: event.target.name,
+            value: event.target.value
+        })
+    };
+
     return (
         <div className={`${col}`}>
             <label>{label}</label>
-            <input type={"text"} className={`form-control ${status.FORM}`} placeholder={placeholder} value={value} onChange={onchange}/>
+            <input type={"text"} className={`form-control ${status.FORM}`} placeholder={placeholder} value={value} onChange={returnValue}/>
 
             {help &&
             <small className="form-text text-muted">{help}</small>
