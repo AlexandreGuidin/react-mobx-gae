@@ -1,9 +1,10 @@
 import React from "react"
+import {Link} from "react-router-dom";
 
-const HeaderItem = ({className,text}) => {
+const HeaderItem = ({className, text, link}) => {
     return (
         <li className={`nav-item  ${className}`}>
-            <a className="nav-link" href="#">{text}</a>
+            <Link to={link} className={"nav-link"}>{text}</Link>
         </li>
     )
 };

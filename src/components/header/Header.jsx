@@ -21,8 +21,8 @@ class Header extends React.Component {
         const {collapsed} = this.state;
 
         return (
-            <nav className="navbar navbar-expand-md  ixed-top navbar-dark bg-dark">
-                <HeaderTitle text={"React-Mobx-Gae"}/>
+            <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+                <HeaderTitle text={"React-Mobx-Gae"} link={"/"}/>
                 <HeaderBurgerMenu collapsed={collapsed} toggle={this.toggle}/>
                 <HeaderItemList collapsed={collapsed}/>
             </nav>

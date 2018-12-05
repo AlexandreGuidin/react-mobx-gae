@@ -5,9 +5,9 @@ const HeaderItemList = ({collapsed}) => {
     return (
         <div className={`navbar-collapse ${collapsed ? '' : 'collapse'}`}>
             <ul className="navbar-nav mr-auto">
-                <HeaderItem text={'Home'}/>
-                <HeaderItem text={'Link'}/>
-                <HeaderItem text={'Disabled'} disabled={true}/>
+                <HeaderItem text={'Home'} link={"/"}/>
+                <HeaderItem text={'Link'} link={"/"}/>
+                <HeaderItem text={'Disabled'} disabled={true} link={"/"}/>
             </ul>
         </div>
     )
