@@ -5,6 +5,8 @@ import {USER_STORE} from "../../stores/user-store";
 import Form from "../commons/form/Form";
 import Field from "../commons/form/Field";
 import {FORM_STATUS} from "../../utils/enums";
+import Checkbox from "../commons/form/Checkbox";
+import Select from "../commons/form/Select";
 
 class Home extends React.Component {
 
@@ -29,6 +31,17 @@ class Home extends React.Component {
 
     render() {
         const {name, logged} = this.state;
+
+        const options = [{
+            label: "option1",
+            value: "option1"
+        }, {
+            label: "option2",
+            value: "option2"
+        }, {
+            label: "option3",
+            value: "option3"
+        }];
 
         return (
             <div className={""}>
@@ -59,7 +72,24 @@ class Home extends React.Component {
                            label={'Name'}
                            placeholder={"PLACEHOLDER HERE"}
                            status={FORM_STATUS.INVALID}
-                           feedbackMessage={"Wrong"}/>
+                           feedback={"Wrong"}
+                    onchange={() => {}}/>
+
+                    <Checkbox value={"yes"} feedback={"wrong"} label={"Want to continue"} name={"accept"} status={FORM_STATUS.INVALID}onchange={() => {}}/>
+
+
+                    <Select status={FORM_STATUS.INVALID} feedback={"teste"} options={options}onchange={() => {}}/>
+
+
+                    <div className="custom-control custom-radio">
+                        <input type="radio" className="custom-control-input" id="customControlValidation2" name="radio-stacked" required/>
+                        <label className="custom-control-label" htmlFor="customControlValidation2">Toggle this custom radio</label>
+                    </div>
+                    <div className="custom-control custom-radio mb-3">
+                        <input type="radio" className="custom-control-input" id="customControlValidation3" name="radio-stacked" required/>
+                        <label className="custom-control-label" htmlFor="customControlValidation3">Or toggle this other custom radio</label>
+                        <div className="invalid-feedback">More example invalid feedback text</div>
+                    </div>
                 </Form>
 
                 {logged &&

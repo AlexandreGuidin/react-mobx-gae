@@ -1,24 +1,25 @@
 import React from "react"
 import PropTypes from "prop-types";
+import {FORM_STATUS} from "../../../utils/enums";
 
-const Checkbox = ({show}) => {
+const Checkbox = ({value, name, label, feedback, status = FORM_STATUS.UNCHECKED, onchange}) => {
     return (
-        <div className="form-group">
-            <div className="form-check">
-                <input className="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required/>
-                <label className="form-check-label" htmlFor="invalidCheck3">
-                    Agree to terms and conditions
-                </label>
-                <div className="invalid-feedback">
-                    You must agree before submitting.
-                </div>
-            </div>
+        <div className={"custom-control custom-checkbox"}>
+            <input className={`custom-control-input`} type={"checkbox"} value={value} name={name} id={name} onChange={onchange}/>
+            <label className={"custom-control-label"} htmlFor={name}>{label}</label>
+
+            {(feedback && status !== FORM_STATUS.UNCHECKED) &&
+            <div className={status.FEEDBACK}>{feedback}</div>
+            }
         </div>
     )
 };
 
 Checkbox.propTypes = {
-    show: PropTypes.string.isRequired
+    value: PropTypes.string.isRequired,
+    feedback: PropTypes.string,
+    status: PropTypes.object,
+    onchange: PropTypes.func.isRequired
 };
 
 export default Checkbox
