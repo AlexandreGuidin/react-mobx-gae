@@ -7,6 +7,7 @@ import Field from "../commons/form/Field";
 import {FORM_STATUS} from "../../utils/enums";
 import Checkbox from "../commons/form/Checkbox";
 import Select from "../commons/form/Select";
+import Radio from "../commons/form/Radio";
 
 class Home extends React.Component {
 
@@ -75,21 +76,16 @@ class Home extends React.Component {
                            feedback={"Wrong"}
                     onchange={() => {}}/>
 
-                    <Checkbox value={"yes"} feedback={"wrong"} label={"Want to continue"} name={"accept"} status={FORM_STATUS.INVALID}onchange={() => {}}/>
+                    <Checkbox value={"yes"} feedback={"wrong"} label={"Want to continue"} name={"accept"} status={FORM_STATUS.VALID}onchange={() => {}}/>
 
 
                     <Select status={FORM_STATUS.INVALID} feedback={"teste"} options={options}onchange={() => {}}/>
 
 
-                    <div className="custom-control custom-radio">
-                        <input type="radio" className="custom-control-input" id="customControlValidation2" name="radio-stacked" required/>
-                        <label className="custom-control-label" htmlFor="customControlValidation2">Toggle this custom radio</label>
-                    </div>
-                    <div className="custom-control custom-radio mb-3">
-                        <input type="radio" className="custom-control-input" id="customControlValidation3" name="radio-stacked" required/>
-                        <label className="custom-control-label" htmlFor="customControlValidation3">Or toggle this other custom radio</label>
-                        <div className="invalid-feedback">More example invalid feedback text</div>
-                    </div>
+                    <Radio value={'a'} onchange={() => {}} status={FORM_STATUS.VALID} label={"label a"} feedback={"wrong"} name={"a"}/>
+                    <Radio value={"b"} onchange={() => {}} status={FORM_STATUS.INVALID} label={"label b"} feedback={"wrong"} name={"b"}/>
+
+
                 </Form>
 
                 {logged &&

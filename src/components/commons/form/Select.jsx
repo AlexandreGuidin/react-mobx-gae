@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const Select = ({options, feedback, status = FORM_STATUS.UNCHECKED, onchange}) => {
     return (
         <div className={"form-group"}>
-            <select className={"custom-select"} onChange={onchange}>
+            <select className={`custom-select ${status.FORM}`} onChange={onchange}>
                 {options.map((o, index) => {
                     return <option value={o.value} key={index}>{o.label}</option>
                 })}
