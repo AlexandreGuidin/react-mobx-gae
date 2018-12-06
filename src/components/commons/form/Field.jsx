@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {FORM_STATUS} from "../../../utils/Enums";
 
 
-const Field = ({col, label, value, name, feedback = '', help = '', placeholder = '', status = FORM_STATUS.UNCHECKED, onchange}) => {
+const Field = ({col, label, value, name, help = '', placeholder = '', onchange, checked, errors}) => {
 
     const returnValue = (event) => {
         onchange({
@@ -12,17 +12,20 @@ const Field = ({col, label, value, name, feedback = '', help = '', placeholder =
         })
     };
 
+    const error = errors ? errors[name] : undefined;
+    const status = error ? FORM_STATUS.INVALID : (checked ? FORM_STATUS.VALID : FORM_STATUS.UNCHECKED);
+
     return (
         <div className={`${col}`}>
             <label>{label}</label>
-            <input type={"text"} className={`form-control ${status.FORM}`} name={name} placeholder={placeholder} value={value} onChange={returnValue}/>
+            <input type={"text"} className={`form-control ${status}`} name={name} placeholder={placeholder} value={value} onChange={returnValue}/>
 
             {help &&
-            <small className="form-text text-muted">{help}</small>
+            <small className={"form-text text-muted"}>{help}</small>
             }
 
-            {(feedback && status !== FORM_STATUS.UNCHECKED) &&
-            <div className={status.FEEDBACK}>{feedback}</div>
+            {error &&
+            <div className={"invalid-feedback"}>{error}</div>
             }
         </div>
     )
@@ -36,7 +39,6 @@ Field.propTypes = {
     feedback: PropTypes.string,
     help: PropTypes.string,
     placeholder: PropTypes.string,
-    status: PropTypes.object,
     onchange: PropTypes.func.isRequired
 };
 

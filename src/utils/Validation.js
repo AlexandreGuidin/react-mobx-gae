@@ -5,10 +5,10 @@ export const validateSchema = (schema, values) => {
         schema.validateSync(values, {abortEarly: false});
         return undefined
     } catch (err) {
-        return err.inner.map((error) => {
-            const errors = {};
-            errors[error.path] = error.message;
-            return errors
+        const errors = {};
+        err.inner.forEach((error) => {
+            errors[error.path] = error.message
         });
+        return errors;
     }
 };

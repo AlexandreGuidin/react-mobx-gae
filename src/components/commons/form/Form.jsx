@@ -10,9 +10,9 @@ const Form = ({children, values, schema, handleSubmit, handleErrors}) => {
         event.preventDefault();
 
         const errors = validateSchema(schema, values);
-        if (errors) {
-            handleErrors(errors)
-        } else {
+        handleErrors(errors);
+
+        if (!errors) {
             handleSubmit(values)
         }
     };
@@ -27,7 +27,7 @@ const Form = ({children, values, schema, handleSubmit, handleErrors}) => {
 
 Form.propTypes = {
     values: PropTypes.object.isRequired,
-    schema: PropTypes.func.isRequired,
+    schema: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     handleErrors: PropTypes.func.isRequired
 };
