@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {FORM_STATUS} from "../../../utils/Enums";
 
 
-const Field = ({col, label, value, name, help = '', placeholder = '', onchange, checked, errors}) => {
+const Field = ({value, name, label, col, help = '', placeholder = '', onchange, errors, checked}) => {
 
     const returnValue = (event) => {
         onchange({
@@ -32,14 +32,15 @@ const Field = ({col, label, value, name, help = '', placeholder = '', onchange, 
 };
 
 Field.propTypes = {
-    col: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
-    feedback: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    col: PropTypes.string.isRequired,
     help: PropTypes.string,
     placeholder: PropTypes.string,
-    onchange: PropTypes.func.isRequired
+    onchange: PropTypes.func.isRequired,
+    errors: PropTypes.object,
+    checked: PropTypes.bool
 };
 
 export default Field

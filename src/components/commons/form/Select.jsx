@@ -2,7 +2,7 @@ import React from "react"
 import {FORM_STATUS} from "../../../utils/Enums";
 import PropTypes from "prop-types";
 
-const Select = ({options, feedback, status = FORM_STATUS.UNCHECKED, onchange}) => {
+const Select = ({value, name, options, onchange, errors, checked}) => {
 
     const returnValue = (event) => {
         onchange({
@@ -11,25 +11,31 @@ const Select = ({options, feedback, status = FORM_STATUS.UNCHECKED, onchange}) =
         })
     };
 
+    const error = errors ? errors[name] : undefined;
+    const status = error ? FORM_STATUS.INVALID : (checked ? FORM_STATUS.VALID : FORM_STATUS.UNCHECKED);
+
     return (
         <div className={"form-group"}>
-            <select className={`custom-select ${status.FORM}`} onChange={returnValue}>
+            <select className={`custom-select ${status}`} onChange={returnValue}>
                 {options.map((o, index) => {
                     return <option value={o.value} key={index}>{o.label}</option>
                 })}
             </select>
-            {(feedback && status !== FORM_STATUS.UNCHECKED) &&
-            <div className={status.FEEDBACK}>{feedback}</div>
+
+            {error &&
+            <div className={"invalid-feedback"}>{error}</div>
             }
         </div>
     )
 };
 
 Select.propTypes = {
+    value: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
-    feedback: PropTypes.string,
-    status: PropTypes.object,
-    onchange: PropTypes.func.isRequired
+    onchange: PropTypes.func.isRequired,
+    errors: PropTypes.object,
+    checked: PropTypes.bool
 };
 
 export default Select

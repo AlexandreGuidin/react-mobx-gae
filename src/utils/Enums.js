@@ -1,3 +1,10 @@
+export const FORM_INPUT_TYPE = Object.freeze({
+    INPUT: 'INPUT',
+    CHECKBOX: 'CHECKBOX',
+    RADIO: 'RADIO',
+    SELECT: 'SELECT'
+});
+
 export const FORM_STATUS = Object.freeze({
     VALID: 'is-valid',
     INVALID: 'is-invalid',

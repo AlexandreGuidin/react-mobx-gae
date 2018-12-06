@@ -2,14 +2,25 @@ import React from "react"
 import PropTypes from "prop-types";
 import {FORM_STATUS} from "../../../utils/Enums";
 
-const Radio = ({value, name, label, feedback, status = FORM_STATUS.UNCHECKED, onchange}) => {
+const Radio = ({value, name, label, onchange, errors, checked}) => {
+
+    const returnValue = (event) => {
+        onchange({
+            name: event.target.name,
+            value: event.target.checked
+        })
+    };
+
+    const error = errors ? errors[name] : undefined;
+    const status = error ? FORM_STATUS.INVALID : (checked ? FORM_STATUS.VALID : FORM_STATUS.UNCHECKED);
+
     return (
         <div className={"custom-control custom-radio"}>
-            <input className={`custom-control-input ${status.FORM}`} type={"radio"} value={value} name={name} id={name} onChange={onchange}/>
+            <input className={`custom-control-input ${status}`} type={"radio"} value={value} name={name} id={name} onChange={returnValue}/>
             <label className={"custom-control-label"} htmlFor={name}>{label}</label>
 
-            {(feedback && status !== FORM_STATUS.UNCHECKED) &&
-            <div className={status.FEEDBACK}>{feedback}</div>
+            {error &&
+            <div className={"invalid-feedback"}>{error}</div>
             }
         </div>
     )
@@ -17,9 +28,11 @@ const Radio = ({value, name, label, feedback, status = FORM_STATUS.UNCHECKED, on
 
 Radio.propTypes = {
     value: PropTypes.string.isRequired,
-    feedback: PropTypes.string,
-    status: PropTypes.object,
-    onchange: PropTypes.func.isRequired
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onchange: PropTypes.func.isRequired,
+    errors: PropTypes.object,
+    checked: PropTypes.bool
 };
 
 export default Radio

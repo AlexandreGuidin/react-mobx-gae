@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types";
 import {FORM_STATUS} from "../../../utils/Enums";
 
-const Checkbox = ({value, name, label, feedback, status = FORM_STATUS.UNCHECKED, onchange}) => {
+const Checkbox = ({value, name, label, onchange, errors, checked}) => {
 
     const returnValue = (event) => {
         onchange({
@@ -11,13 +11,16 @@ const Checkbox = ({value, name, label, feedback, status = FORM_STATUS.UNCHECKED,
         })
     };
 
+    const error = errors ? errors[name] : undefined;
+    const status = error ? FORM_STATUS.INVALID : (checked ? FORM_STATUS.VALID : FORM_STATUS.UNCHECKED);
+
     return (
         <div className={"custom-control custom-checkbox"}>
-            <input className={`custom-control-input ${status.FORM}`} type={"checkbox"} value={value} name={name} id={name} onChange={returnValue}/>
+            <input className={`custom-control-input ${status}`} type={"checkbox"} value={value} name={name} id={name} onChange={returnValue}/>
             <label className={"custom-control-label"} htmlFor={name}>{label}</label>
 
-            {(feedback && status !== FORM_STATUS.UNCHECKED) &&
-            <div className={status.FEEDBACK}>{feedback}</div>
+            {error &&
+            <div className={"invalid-feedback"}>{error}</div>
             }
         </div>
     )
@@ -25,9 +28,11 @@ const Checkbox = ({value, name, label, feedback, status = FORM_STATUS.UNCHECKED,
 
 Checkbox.propTypes = {
     value: PropTypes.string.isRequired,
-    feedback: PropTypes.string,
-    status: PropTypes.object,
-    onchange: PropTypes.func.isRequired
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onchange: PropTypes.func.isRequired,
+    errors: PropTypes.object,
+    checked: PropTypes.bool
 };
 
 export default Checkbox

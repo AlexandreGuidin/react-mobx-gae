@@ -2,47 +2,59 @@ import React from "react"
 import {inject} from "mobx-react";
 import {USER_STORE} from "../../stores/user-store";
 import Form from "../commons/form/Form";
-import Field from "../commons/form/Field";
-import Button from "../commons/form/Button";
 import {userSchema} from "../../utils/schemas/UserSchema";
+import {BTN_OUTLINE_STYLE, FORM_INPUT_TYPE} from "../../utils/Enums";
 
 class Home extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            checked: false,
-            errors: undefined,
-            submitting: false,
-            values: {
-                name: '',
-                lastName: ''
-            }
-        }
-    }
-
-    handleChange = (input) => {
-        const {values, errors} = this.state;
-        values[input.name] = input.value;
-
-        if (errors && errors[input.name]) {
-            delete errors[input.name];
-        }
-
-        this.setState({values: values, errors: errors, checked: false});
-    };
-
-    handleSubmit = (values) => {
-        console.log(values)
-    };
-
-    handleErrors = (errors) => {
-        this.setState({errors: errors, checked: true});
-    };
 
     render() {
-        const {name, lastName} = this.state.values;
+
+        const fields = [
+            {
+                type: FORM_INPUT_TYPE.INPUT,
+                name: 'name',
+                label: 'Name',
+                placeholder: 'Placeholder Here'
+            },
+            {
+                type: FORM_INPUT_TYPE.INPUT,
+                name: 'lastName',
+                label: 'Last Name',
+                placeholder: 'Placeholder Here'
+            },
+            {
+                type: FORM_INPUT_TYPE.SELECT,
+                name: 'number',
+                label: 'select a number',
+                options: [{
+                    key: 1,
+                    label: '1'
+                }, {
+                    key: 2,
+                    label: '2'
+                }, {
+                    key: 3,
+                    label: '3'
+                }
+                ]
+            },
+            {
+                type: FORM_INPUT_TYPE.CHECKBOX,
+                name: 'accept',
+                label: 'accept this check',
+            }
+        ];
+
+        const actions = [
+            {
+                label: 'SUBMIT!'
+            },
+            {
+                label: 'CANCEL!',
+                style: BTN_OUTLINE_STYLE.SECONDARY
+            }
+        ];
 
         return (
             <div className={""}>
@@ -52,31 +64,8 @@ class Home extends React.Component {
                     </div>
                 </div>
 
-
-                <Form handleErrors={this.handleErrors} handleSubmit={this.handleSubmit} values={this.state.values} schema={userSchema}>
-                    <Field value={name}
-                           col={'col-3'}
-                           name={'name'}
-                           label={'Name'}
-                           placeholder={"PLACEHOLDER HERE"}
-                           errors={this.state.errors}
-                           checked={this.state.checked}
-                           feedback={"Wrong"}
-                           onchange={this.handleChange}/>
-
-                    <Field value={lastName}
-                           col={'col-3'}
-                           name={'lastName'}
-                           label={'Last Name'}
-                           placeholder={"PLACEHOLDER HERE"}
-                           errors={this.state.errors}
-                           checked={this.state.checked}
-                           feedback={"Wrong"}
-                           onchange={this.handleChange}/>
-
-                    <Button label={"SUBMIT"}/>
-                </Form>
-
+                <Form success={() => {
+                }} schema={userSchema} fields={fields} actions={actions}/>
 
             </div>
         )
