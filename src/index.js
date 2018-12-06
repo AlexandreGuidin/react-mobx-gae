@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import {Provider} from "mobx-react";
 
 import userStore from "./stores/user-store"
-import {isDev} from "./utils/environment-util";
+import {isDev} from "./utils/Environment";
 
 const stores = {
     userStore

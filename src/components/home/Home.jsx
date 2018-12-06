@@ -1,15 +1,11 @@
 import React from "react"
-import {Link} from "react-router-dom";
 import {inject} from "mobx-react";
 import {USER_STORE} from "../../stores/user-store";
 import Form from "../commons/form/Form";
 import Field from "../commons/form/Field";
-import {BTN_OUTLINE_STYLE, BTN_STYLE, FORM_STATUS} from "../../utils/enums";
-import Checkbox from "../commons/form/Checkbox";
-import Select from "../commons/form/Select";
-import Radio from "../commons/form/Radio";
+import {FORM_STATUS} from "../../utils/Enums";
 import Button from "../commons/form/Button";
-import {FormHoc} from "../commons/form/FormHoc";
+import {userSchema} from "../../utils/schemas/UserSchema";
 
 class Home extends React.Component {
 
@@ -17,35 +13,31 @@ class Home extends React.Component {
         super(props);
 
         this.state = {
-            name: '',
-            logged: false
+            errors: undefined,
+            values: {
+                name: '',
+                lastName: ''
+            }
         }
     }
 
-    handleChange = (event) => {
-        this.setState({name: event.target.value});
+    handleChange = (value) => {
+        const {values} = this.state;
+        values[value.name] = value.value;
+        this.setState(values);
     };
 
-    handleSubmit = (event) => {
-        this.props.userStore.user = {name: this.state.name};
-        this.setState({logged: true, name: ''});
-        event.preventDefault();
+    handleSubmit = (values) => {
+        console.log(values)
     };
+
+    handleErrors = (errors) => {
+        console.log(errors)
+    };
+
 
     render() {
-        const {name, logged} = this.state;
-
-        const options = [{
-            label: "option1",
-            value: "option1"
-        }, {
-            label: "option2",
-            value: "option2"
-        }, {
-            label: "option3",
-            value: "option3"
-        }];
-
+        const {name, lastName} = this.state.values;
 
 
         return (
@@ -57,17 +49,27 @@ class Home extends React.Component {
                 </div>
 
 
-                <Form>
-                    <Field value={''}
+                <Form handleErrors={this.handleErrors} handleSubmit={this.handleSubmit} values={this.state.values} schema={userSchema}>
+                    <Field value={name}
                            col={'col-3'}
+                           name={'name'}
                            label={'Name'}
                            placeholder={"PLACEHOLDER HERE"}
-                           status={FORM_STATUS.INVALID}
+                           status={FORM_STATUS.UNCHECKED}
                            feedback={"Wrong"}
-                           onchange={() => {
-                           }}/>
-                </Form>
+                           onchange={this.handleChange}/>
 
+                    <Field value={lastName}
+                           col={'col-3'}
+                           name={'lastName'}
+                           label={'Last Name'}
+                           placeholder={"PLACEHOLDER HERE"}
+                           status={FORM_STATUS.UNCHECKED}
+                           feedback={"Wrong"}
+                           onchange={this.handleChange}/>
+
+                    <Button label={"SUBMIT"}/>
+                </Form>
 
 
             </div>

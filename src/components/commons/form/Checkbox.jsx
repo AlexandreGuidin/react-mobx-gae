@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types";
-import {FORM_STATUS} from "../../../utils/enums";
+import {FORM_STATUS} from "../../../utils/Enums";
 
 const Checkbox = ({value, name, label, feedback, status = FORM_STATUS.UNCHECKED, onchange}) => {
 

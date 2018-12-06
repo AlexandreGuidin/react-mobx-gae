@@ -1,5 +1,5 @@
 import React from "react"
-import {BTN_STYLE} from "../../../utils/enums";
+import {BTN_STYLE} from "../../../utils/Enums";
 import Field from "./Field";
 import PropTypes from "prop-types";
 

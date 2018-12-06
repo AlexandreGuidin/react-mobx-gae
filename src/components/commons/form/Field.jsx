@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types";
-import {FORM_STATUS} from "../../../utils/enums";
+import {FORM_STATUS} from "../../../utils/Enums";
 
 
 const Field = ({col, label, value, name, feedback = '', help = '', placeholder = '', status = FORM_STATUS.UNCHECKED, onchange}) => {
@@ -15,7 +15,7 @@ const Field = ({col, label, value, name, feedback = '', help = '', placeholder =
     return (
         <div className={`${col}`}>
             <label>{label}</label>
-            <input type={"text"} className={`form-control ${status.FORM}`} placeholder={placeholder} value={value} onChange={returnValue}/>
+            <input type={"text"} className={`form-control ${status.FORM}`} name={name} placeholder={placeholder} value={value} onChange={returnValue}/>
 
             {help &&
             <small className="form-text text-muted">{help}</small>
@@ -31,6 +31,7 @@ const Field = ({col, label, value, name, feedback = '', help = '', placeholder =
 Field.propTypes = {
     col: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     feedback: PropTypes.string,
     help: PropTypes.string,

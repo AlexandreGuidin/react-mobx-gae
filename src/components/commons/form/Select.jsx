@@ -1,5 +1,5 @@
 import React from "react"
-import {FORM_STATUS} from "../../../utils/enums";
+import {FORM_STATUS} from "../../../utils/Enums";
 import PropTypes from "prop-types";
 
 const Select = ({options, feedback, status = FORM_STATUS.UNCHECKED, onchange}) => {
